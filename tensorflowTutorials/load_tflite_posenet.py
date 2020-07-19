@@ -22,7 +22,9 @@ interpreter.set_tensor(input_details[0]['index'], input_data)
 
 interpreter.invoke()
 output_data = interpreter.get_tensor(output_details[0]['index'])
-print(f"output data {output_data}")
+# for key in output_data:
+#     print(key)
+# print(f"output data {output_data}")
 print(f"output shape {output_data.shape}")
 #get the camera image
 #process image into particular shape and format for model
