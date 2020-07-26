@@ -38,9 +38,17 @@ while True:
 
     interpreter.invoke()
     output_data = interpreter.get_tensor(output_details[0]['index'])
-
+    outptut_data = tf.sigmoid(output_data)
+    heatmap_X = tf.argmax(output_data,axis=1)
+    heatmap_Y = tf.argmax(output_data,axis=2)
     #cv2.putText(frame, f"{str(round(fpsFilter,1))} fps {item}",(0,30),font,1,(0,0,255),2)
-    cv2.putText(frame, f"output shape {output_data[0,0]}",(0,30),font,1,(0,0,255),2)
+    #cv2.putText(frame, f"output {output_data[0,:,:,8]}",(0,30),font,1,(0,0,255),2)
+    cv2.putText(frame, f"output shape {heatmap_X.shape}{heatmap_Y.shape}",(0,60),font,1,(0,0,255),2)
+    #print(f"output {sig_output[0,:,:,8]}")
+    #print(heatmap[:,:,0])
+    for point in heatmap_X:
+        #cv2.circle(frame, (x,y),2,(0,0,255))
+        print(f"point {point}")
     cv2.imshow('recCam',frame)
     cv2.moveWindow('recCam',0,0)
     if cv2.waitKey(1) == ord('q'):
